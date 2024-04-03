@@ -1,6 +1,6 @@
 ## Frappe Portal
 
-itsyosefali
+Vue Portal Of Frappe New Apps
 
 #### License
 
