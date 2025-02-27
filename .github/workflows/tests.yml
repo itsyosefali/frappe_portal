@@ -11,4 +11,3 @@ jobs:
     with:
       enable-postgres: true
       parallel-runs: 2
-    # Remove undefined inputs: disable-socketio and disable-redis-socketio
