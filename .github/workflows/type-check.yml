@@ -1,0 +1,10 @@
+name: Type Check
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  typecheck:
+    name: Types
+    uses: frappe/frappe/.github/workflows/_base-type-check.yml@develop
