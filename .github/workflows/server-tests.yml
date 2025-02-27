@@ -50,19 +50,25 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: frappe/frappe
-          ref: version-14  # Replace with the correct branch/version
+          ref: version-14  # Replace with your branch
           path: apps/frappe
-          token: ${{ secrets.GITHUB_TOKEN }}  # Required for private repositories
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Patch RestrictedPython Version
+        run: |
+          # Fix RestrictedPython version in Frappe's setup.py
+          cd apps/frappe
+          sed -i "s/RestrictedPython~=6.2/RestrictedPython>=7.0/" setup.py
 
       - name: Install Frappe
         run: |
           cd apps/frappe
-          pip install -e .  # Install Frappe in editable mode
+          pip install -e .
 
       - name: Run Server Tests
         uses: ./.github/workflows/_base-server-tests.yml
         with:
-          enable-postgres: true  # This will test against both MariaDB and PostgreSQL
+          enable-postgres: true
           parallel-runs: 2
           enable-coverage: ${{ github.event_name != 'pull_request' }}
           fake-success: ${{ needs.checkrun.outputs.build != 'strawberry' }}
